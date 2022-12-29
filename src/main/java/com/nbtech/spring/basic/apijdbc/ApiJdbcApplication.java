@@ -12,17 +12,19 @@ import java.sql.Date;
 @SpringBootApplication
 public class ApiJdbcApplication implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	@Autowired
+	TournamentDAO tournamentDAO;
 	@Autowired
 	PlayerDAO playerDao;
 	public static void main(String[] args) {
 		SpringApplication.run(ApiJdbcApplication.class, args);
+
+
 	}
-@Autowired
-TournamentDAO tournamentDAO;
 	@Override
 	public void run(String... args) throws Exception {
 tournamentDAO.createTournamentTable();
+		logger.info("French Players: {}", playerDao.getPlayerByNationality("France"));
 		logger.info("Inserting Player 4: {}", playerDao.insertPlayer(
 				new Player (4, "Thiem", "Austria", new Date(System.currentTimeMillis()), 17 ))
 		);
