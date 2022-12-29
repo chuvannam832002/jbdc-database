@@ -1,4 +1,4 @@
-package com.nbtech.spring.basic.apijdbc;
+package com.nbtech.spring.basic.dataaccess.SpringJdbcApi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

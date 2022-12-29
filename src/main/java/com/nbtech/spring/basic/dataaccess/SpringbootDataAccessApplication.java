@@ -1,5 +1,8 @@
-package com.nbtech.spring.basic.apijdbc;
+package com.nbtech.spring.basic.dataaccess;
 
+import com.nbtech.spring.basic.dataaccess.SpringJdbcApi.Player;
+import com.nbtech.spring.basic.dataaccess.SpringJdbcApi.PlayerDAO;
+import com.nbtech.spring.basic.dataaccess.SpringJdbcApi.TournamentDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +13,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.Date;
 
 @SpringBootApplication
-public class ApiJdbcApplication implements CommandLineRunner {
+public class SpringbootDataAccessApplication implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	TournamentDAO tournamentDAO;
 	@Autowired
 	PlayerDAO playerDao;
 	public static void main(String[] args) {
-		SpringApplication.run(ApiJdbcApplication.class, args);
+		SpringApplication.run(SpringbootDataAccessApplication.class, args);
 
 
 	}
@@ -26,7 +29,7 @@ public class ApiJdbcApplication implements CommandLineRunner {
 tournamentDAO.createTournamentTable();
 		logger.info("French Players: {}", playerDao.getPlayerByNationality("France"));
 		logger.info("Inserting Player 4: {}", playerDao.insertPlayer(
-				new Player (4, "Thiem", "Austria", new Date(System.currentTimeMillis()), 17 ))
+				new Player(4, "Thiem", "Austria", new Date(System.currentTimeMillis()), 17 ))
 		);
 
 		logger.info("Updating Player with Id 4: {}", playerDao.updatePlayer(
