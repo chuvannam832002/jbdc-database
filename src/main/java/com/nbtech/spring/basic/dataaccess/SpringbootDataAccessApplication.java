@@ -71,6 +71,7 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 		//Updating row
 		logger.info("Updating Player with Id 3: {}", springDataPlayerRepository.save(new PlayerEntity(3, "Thiem", "Austria",
 				Date.valueOf("1993-09-03"), 17)));
+		logger.info("Player with nationlity name : {}",springDataPlayerRepository.findByNationality("France"));
 
 		logger.info("Player with Id 2: {}", springDataPlayerRepository.findById(2));
 
