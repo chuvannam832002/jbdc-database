@@ -2,7 +2,7 @@ package com.nbtech.spring.basic.dataaccess.SpringDataJPA;
 
 import javax.persistence.*;
 import java.sql.Date;
-
+@NamedQuery(name="get_all_players", query="select p from PlayerEntity p")
 @Entity
 @Table(name="PlayerTable")
 public class PlayerEntity {
