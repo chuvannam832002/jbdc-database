@@ -2,6 +2,7 @@ package com.nbtech.spring.basic.dataaccess;
 
 import com.nbtech.spring.basic.dataaccess.SpringDataJPA.PlayerEntity;
 import com.nbtech.spring.basic.dataaccess.SpringDataJPA.PlayerRepository;
+import com.nbtech.spring.basic.dataaccess.SpringDataJPA.SpringDataJPAPlayerRepository;
 import com.nbtech.spring.basic.dataaccess.SpringJdbcApi.Player;
 import com.nbtech.spring.basic.dataaccess.SpringJdbcApi.PlayerDAO;
 import com.nbtech.spring.basic.dataaccess.SpringJdbcApi.TournamentDAO;
@@ -23,6 +24,8 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 	PlayerRepository playerRepository;
 	@Autowired
 	PlayerDAO playerDao;
+	@Autowired
+	SpringDataJPAPlayerRepository springDataPlayerRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootDataAccessApplication.class, args);
 
@@ -30,7 +33,7 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-SpringDataJPA();
+		SpringDataRepositoryEx();
 
 	}
 	private void SpringDataJPA() {
@@ -56,7 +59,25 @@ SpringDataJPA();
 		playerRepository.deleteById(2);
 		logger.info("\n\n>> All Players Data: {}", playerRepository.getAllPlayers());
 	}
+	private void SpringDataRepositoryEx() {
+		//Inserting rows
+		logger.info("Inserting Player: {}", springDataPlayerRepository.save(new PlayerEntity("Djokovic", "Serbia",
+				Date.valueOf("1987-05-22"), 81)));
+		logger.info("Inserting Player: {}", springDataPlayerRepository.save(new PlayerEntity("Monfils", "France",
+				Date.valueOf("1986-09-01"), 10)));
+		logger.info("Inserting Player: {}", springDataPlayerRepository.save(new PlayerEntity("Thiem", "Austria",
+				new Date(System.currentTimeMillis()), 17)));
 
+		//Updating row
+		logger.info("Updating Player with Id 3: {}", springDataPlayerRepository.save(new PlayerEntity(3, "Thiem", "Austria",
+				Date.valueOf("1993-09-03"), 17)));
+
+		logger.info("Player with Id 2: {}", springDataPlayerRepository.findById(2));
+
+		logger.info("All Players Data: {}", springDataPlayerRepository.findAll());
+
+		springDataPlayerRepository.deleteById(2);
+	}
 	private void SpringJdbcApi() {
 		tournamentDAO.createTournamentTable();
 
